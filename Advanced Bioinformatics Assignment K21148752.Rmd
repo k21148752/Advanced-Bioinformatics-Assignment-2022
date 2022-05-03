@@ -1,0 +1,96 @@
+---
+title: "Advanced Bioinformatics 2022 Assessment"
+author: "Muhammad Musab Mirza K21148752"
+date: '2022-04-28'
+output: html_document
+---
+```{r Task 3.1}
+#Task 3.1
+#The 'sum' function returns the sum of all values which are present within its arguments
+sum(5:55)
+```
+```{r Task 3.2}
+#Task 3.2
+#sumfun is a prestep function for momentfun. The argument included in the bracket is a mid step for generating linear combination function. The sum of all integers between 5 and n is calculated
+sumfun <- function(n) {sum(5:n)}
+#The argument is that n= 10, 20 and 100
+sumfun(10)
+sumfun(20)
+sumfun(100)
+```
+
+
+```{r Task 3.3}
+#Task 3.3
+#The first two terms of this fibonacci sequence are 1 and 1. The rest of the terms are obtained via adding the proceeding two terms
+#The first 12 enteries are then generated
+Fibonacci <- function(n)
+Fibonacci <- numeric(n)
+Fibonacci <- numeric(12)
+Fibonacci[1] <- 1
+Fibonacci[2] <- 1
+for(i in 3:12) Fibonacci[i] <- Fibonacci[i-2] + Fibonacci[i-1]
+#The output is then printed
+print(Fibonacci)
+```
+
+
+```{r Task 3.4}
+#Task 3.4
+# The library ggplot2 is loaded
+library(ggplot2)
+#This command is used to create 'a' as a variable, the data set is then loaded as 'mtcars', miles per gallon (mpg) is plotted as a function of gear. The x axis represent the gears whereas the y axis represents mpg. Aes fill is used to color the boxplot in the graph
+a <- ggplot(data = mtcars, aes(as.factor(gear),y = mpg))+geom_boxplot(aes(fill=as.factor(gear)))
+#To give the plot a title
+a+ggtitle("box plot of mpg versus no. of gears")
+```
+
+
+```{r Task 3.5}
+#Task 3.5
+#variables y and x are assigned to distance and speed, respectively.
+y <- cars$dist
+x <- cars$speed
+#variable a is then assigned to the lm function which then generates the linear model between speed and distance
+a <- lm(formula = "y ~ x")
+#To produce the statistics of the linear model
+summary(a)
+```
+
+
+```{r Task 3.6}
+#Task 3.6
+#The input is given as the data set 'cars' and the columns 'speed' and 'distance'.
+input <- cars[,c('speed' , 'dist')]
+#load the ggplot2 library
+library(ggplot2)
+#Variable 'a' is assigned to generate the plot in which 'cars' is given as the data set. Within the aesthetics, x=speed and y=distance. 'lm' is used to produce the line of best fit and the confidence intervals
+a <- ggplot(data = cars, aes(x= speed, y=dist)) + geom_point() + geom_smooth(method = 'lm' ,formula = "y ~ x")
+#To produce the title for the plot
+a+ggtitle("linear regression plot speed vs data")
+```
+
+
+```{r Task 3.7}
+#Task 3.7
+#distance_miles = the variable for distance. The distance is converted from ft to miles by multiplying by 0.000189
+distance_miles <- cars$dist*0.000189
+#The assigning variable = speed_miles, and the braking distance is assumed to be proportional to the seuare of the the speed
+speed_miles <- cars$speed^2
+#Calculate the linear model between distance and speed
+lm <- lm(formula = "distance_miles ~ speed_miles", data = cars)
+summary(lm)
+lm$coefficients
+#The reaction time is calculated by multiplying by 3600 since this is how many seconds are in one hour
+reaction_time <- 2.437508e-05*3600
+reaction_time
+#load the ggplot2 library
+library(ggplot2)
+#Variable 'a' is assigned to generate the plot in which 'cars' is given as the data set. Within the aesthetics, x=speed_miles and y=distance_miles. 'lm' is used to produce the line of best fit and the confidence intervals
+a <- ggplot(data = cars, aes(x = speed_miles, y = distance_miles)) + geom_point() + geom_smooth(method = "lm",formula = "y ~ x")
+#To produce the title for the plot
+plot <- a+ggtitle("linear regression plot distance vs speed")
+plot
+```
+
+
